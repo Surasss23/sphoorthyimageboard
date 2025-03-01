@@ -1,76 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR0tbmt01vyhpI7YQKVK5bzI7o5_UO2gdUdkp0x1-mV7bjJ7QEBteGJm3085yD2zPK1vQ2fszARi93w/pub?output=csv';
 
-body {
-    font-family: 'JetBrains Mono', monospace;
-    text-align: center;
-    background: linear-gradient(135deg, #ff4b2b, #8f50fb);
-    color: white;
-    padding: 20px;
-}
+async function fetchData() {
+    try {
+        const response = await fetch(SHEET_URL);
+        const data = await response.text();
+        const rows = data.split("\n").map(row => row.split(","));
 
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+        // Skip headers & get the latest entry (last row)
+        const lastRow = rows[rows.length - 1];
+        const imageUrl = lastRow[0].trim();
+        const description = lastRow.slice(1).join(",").trim(); // In case text has commas
 
-.image-container {
-    width: 90%;
-    max-width: 600px;
-    height: 300px;
-    background: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    margin: 0 auto 20px auto;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.text-box {
-    width: 90%;
-    max-width: 600px;
-    background: #121212;
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: left;
-    position: relative;
-    margin: 0 auto;
-}
-
-.file-header {
-    font-size: 14px;
-    color: #aaa;
-    margin-bottom: 10px;
-}
-
-.text-content {
-    font-size: 16px;
-    max-height: 100px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #8f50fb #121212;
-}
-
-.footer {
-    font-size: 12px;
-    color: #666;
-    margin-top: 10px;
-}
-
-/* Mobile Responsive */
-@media (max-width: 600px) {
-    .image-container {
-        height: 250px;
-    }
-
-    .text-content {
-        max-height: 150px;
+        document.getElementById("image").src = imageUrl;
+        document.getElementById("description").innerText = description;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        document.getElementById("description").innerText = "Failed to load data.";
     }
 }
+
+// Load data initially
+fetchData();
+
+// Auto-update every 10 seconds
+setInterval(fetchData, 10000);
