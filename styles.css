@@ -1,29 +1,28 @@
-/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
 body {
     font-family: 'JetBrains Mono', monospace;
     text-align: center;
-    background: linear-gradient(135deg, #ff4d5a, #8a50f8);
+    background: linear-gradient(135deg, #ff4b2b, #8f50fb);
     color: white;
     padding: 20px;
 }
 
-/* Title */
 .title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-/* Image Box */
 .image-container {
-    width: 600px;
-    height: 350px;
-    background: #f0f0f0;
-    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    height: 300px;
+    background: #ffffff;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    margin: auto;
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 20px auto;
 }
 
 .image-container img {
@@ -32,52 +31,46 @@ body {
     object-fit: cover;
 }
 
-/* Text Box */
 .text-box {
-    width: 600px;
-    background: #0d1117;
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    margin: 20px auto;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
+    width: 90%;
+    max-width: 600px;
+    background: #121212;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    position: relative;
+    margin: 0 auto;
 }
 
-/* Header Bar */
-.window-header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding-bottom: 8px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
-
-.file-name {
+.file-header {
     font-size: 14px;
     color: #aaa;
-    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
-/* Text Inside Box */
-.text-box p {
-    font-size: 18px;
-    margin: 0;
+.text-content {
+    font-size: 16px;
+    max-height: 100px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8f50fb #121212;
 }
 
-.hashtags {
-    display: block;
-    font-size: 14px;
-    color: #888;
+.footer {
+    font-size: 12px;
+    color: #666;
     margin-top: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .image-container {
+        height: 250px;
+    }
+
+    .text-content {
+        max-height: 150px;
+    }
 }
